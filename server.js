@@ -6,18 +6,21 @@ server.use('/',express.static('public')); // serve static files from /public
 function respondToClient(request, response) {
   // make a response JSON object to send:
   var responseBody = {
-    name: request.params.name
+    height: request.params.height,
+    status: request.params.status,
+    score: request.params.score
   }
-  // check the age of the client:
-  if (request.params.age > 21) {
-    // add a comment to the response body:
-    responseBody.comment = 'You are old enough to have a drink.';
-  } else {
-    responseBody.comment = 'stay away from the bar';
-  }
+
+  // // check the age of the client:
+  // if (request.params.age > 21) {
+  //   // add a comment to the response body:
+  //   responseBody.comment = 'You are old enough to have a drink.';
+  // } else {
+  //   responseBody.comment = 'stay away from the bar';
+  // }
   // send the response:
   response.end(JSON.stringify(responseBody));
 }
 
 server.listen(8080);                                  // start the server
-server.get('/name/:name/age/:age', respondToClient);  // listen for GET requests
+server.get('/height/:height/status/:status/score/:score', respondToClient);  // listen for GET requests
